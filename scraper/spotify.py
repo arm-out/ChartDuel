@@ -10,24 +10,27 @@ auth_manager = SpotifyClientCredentials()
 sp = spotipy.Spotify(auth_manager=auth_manager)
 
 
-def getTrackID(df):
-    for i, row in df.iterrows():
-        results = sp.search(
-            q=f'{row["title"]} artist:{row["artist"]}', type='track', limit=1)
+df = pd.read_csv('us_data.csv')
 
-        if len(results['tracks']['items']) == 0:
-            print(f'No results for {row["title"]} by {row["artist"]}')
-            continue
+for i, row in df.iterrows():
+    results = sp.search(
+        q=f'{row["title"]} artist:{row["artist"]}', type='track', limit=1)
 
-        track = results['tracks']['items'][0]
-        image = track['album']['images'][0]['url']
+    if len(results['tracks']['items']) == 0:
+        print(f'No results for {row["title"]} by {row["artist"]}')
+        continue
 
-        # add spotify data to dataframe
-        df.at[i, 'id'] = track['id']
-        df.at[i, 'image'] = image
+    track = results['tracks']['items'][0]
+    image = track['album']['images'][0]['url']
 
-        if i % 100 == 0:
-            print(f'{i}/{len(df)}')
+    # add spotify data to dataframe
+    df.at[i, 'id'] = track['id']
+    df.at[i, 'image'] = image
+
+    if i % 100 == 0:
+        print(f'{i}/{len(df)}')
+
+df.to_csv('us_spotify_data.csv', index=False)
 
 
 # df = pd.read_csv('spotify_data_preview.csv')
