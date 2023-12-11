@@ -11,25 +11,25 @@ export interface Database {
     Tables: {
       songs: {
         Row: {
-          artist: string | null
+          artist: string
           id: string
-          image: string | null
-          streams: number | null
-          title: string | null
+          image: string
+          streams: number
+          title: string
         }
         Insert: {
-          artist?: string | null
+          artist: string
           id: string
-          image?: string | null
-          streams?: number | null
-          title?: string | null
+          image: string
+          streams: number
+          title: string
         }
         Update: {
-          artist?: string | null
+          artist?: string
           id?: string
-          image?: string | null
-          streams?: number | null
-          title?: string | null
+          image?: string
+          streams?: number
+          title?: string
         }
         Relationships: []
       }
