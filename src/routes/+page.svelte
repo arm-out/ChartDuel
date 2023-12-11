@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+	import Card from './Card.svelte';
+	export let data;
+
+	let base = data.base;
+	let cur = data.cur;
+	let next = data.next;
+</script>
+
+<div class="grid grid-cols-2 gap-1 bg-spotify-green">
+	<Card {...base} />
+	<Card {...cur} hidden={true} />
+</div>
