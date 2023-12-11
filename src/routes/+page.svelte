@@ -2,7 +2,7 @@
 	import type { ComponentEvents } from 'svelte';
 	import Card from './Card.svelte';
 	import { nextSong } from '$lib/client';
-	import type { Tables } from '$lib/types/supabase';
+	import type { Song } from './+page.server';
 	export let data;
 
 	let base = data.base;
@@ -14,6 +14,13 @@
 	// Game logic
 	let score = 0;
 	let highScore = 0;
+
+	async function getColor(song: Song) {
+		const imgUrl = song.image.split('/');
+		const response = await fetch('/api/color?img=' + imgUrl[imgUrl.length - 1]);
+		const color = await response.json();
+		song.color = color.color;
+	}
 
 	async function handleGuess(event: ComponentEvents<Card>['guess']) {
 		if (event.detail.guess === 'higher') {
@@ -35,6 +42,7 @@
 		base = cur;
 		cur = next;
 		next = (await nextSong(1))[0];
+		await getColor(next);
 	}
 </script>
 
@@ -43,13 +51,13 @@
 </svelte:head>
 
 <div class="grid grid-cols-2 gap-1 bg-spotify-green">
-	<Card {...base} />
-	<Card on:guess={handleGuess} {...cur} guess={true} />
+	<Card {...base} color={base.color} />
+	<Card on:guess={handleGuess} {...cur} color={cur.color} guess={true} />
 </div>
 
-<p class="bg-spotify-dark text-white absolute bottom-0 pl-5 text-3xl pb-5">
+<p class=" text-white absolute bottom-0 pl-5 text-3xl pb-5">
 	High Score: {highScore}
 </p>
-<p class="bg-spotify-dark text-white absolute bottom-0 right-0 pr-5 text-3xl pb-5">
+<p class=" text-white absolute bottom-0 right-0 pr-5 text-3xl pb-5">
 	Score: {score}
 </p>
