@@ -26,7 +26,7 @@
 	// Game logic
 	let score = 0;
 	let prevScore = score;
-	let endScreen = true;
+	let endScreen = false;
 
 	// Stats
 	let inPlay = false;
