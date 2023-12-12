@@ -4,43 +4,51 @@
 	import Card from './Card.svelte';
 	import { nextSong } from '$lib/client';
 	import type { Song } from './+page.server';
+	import { highScore } from '$lib/stores';
+	import { timesPlayed } from '$lib/stores';
+
 	export let data;
 
+	// Carousel
 	let base = data.base;
 	let cur = data.cur;
 	let next = data.next;
 
-	$: console.log(base.title + ', ' + cur.title + ', ' + next.title);
-
+	// Animation
 	let animate = false;
 	let rerender = false; // trigger
 
-	$: preloadUrl = next.image;
-
 	// Game logic
 	let score = 0;
-	let highScore = 0;
 	let prevScore = score;
 	let endScreen = false;
+
+	// Stats
+	let inPlay = false;
 
 	async function getColor(song: Song) {
 		const imgUrl = song.image.split('/');
 		const response = await fetch('/api/color?img=' + imgUrl[imgUrl.length - 1]);
 		const color = await response.json();
-		console.log('got color');
 		song.color = color.color;
 
 		rerender = !rerender;
 	}
 
 	function endGame() {
-		highScore = Math.max(score, highScore);
+		highScore.update((n) => Math.max(n, score));
 		prevScore = score;
 		score = 0;
 		endScreen = true;
+		inPlay = false;
 	}
 
 	async function handleGuess(event: ComponentEvents<Card>['guess']) {
+		if (!inPlay) {
+			inPlay = true;
+			timesPlayed.update((n) => n + 1);
+		}
+
 		if (event.detail.guess === 'higher') {
 			if (cur.streams > base.streams) {
 				score++;
@@ -65,10 +73,6 @@
 		}, 1000);
 	}
 </script>
-
-<svelte:head>
-	<link rel="preload" as="image" href={preloadUrl} />
-</svelte:head>
 
 <div class=" bg-spotify-green h-screen w-screen overflow-hidden absolute">
 	{#key base.id}
@@ -99,15 +103,15 @@
 </div>
 
 <p class="text-white absolute bottom-0 pl-5 text-3xl pb-5">
-	High Score: {highScore}
+	High Score: {$highScore}
 </p>
 <p class=" text-white absolute bottom-0 right-0 pr-5 text-3xl pb-5">
 	Score: {score}
 </p>
 
 <EndModal bind:endScreen>
-	<h2 slot="header">{prevScore}</h2>
-	<p>High Score: {highScore}</p>
+	<h2 slot="header" class="text-5xl font-bold text-center text-spotify-green">{prevScore}</h2>
+	<p>High Score: {$highScore}</p>
 	<p>Nice try</p>
 </EndModal>
 
