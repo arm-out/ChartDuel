@@ -170,8 +170,17 @@
 					<Card on:guess={handleGuess} {...next} color={next.color} guess={true} />
 				</section>
 			{/key}
+
+			<p class="text-white absolute top-5 left-5 text-m">
+				High Score: {$highScore}
+			</p>
+			<p class=" text-white absolute top-5 right-5 text-m">
+				Score: {score}
+			</p>
 		</div>
 	{/if}
+
+	<!-- SERVER PRERENDER -->
 {:else}
 	<div class="h-screen w-screen bg-cd-dark flex items-center justify-center"></div>
 {/if}
