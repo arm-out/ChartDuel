@@ -9,6 +9,9 @@ export default {
 				'cd-green': '#1ED760',
 				'cd-light': '#777777',
 				'cd-red': '#D6241E'
+			},
+			screens: {
+				sm: '696px'
 			}
 		}
 	},

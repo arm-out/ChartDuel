@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import EndModal from './EndModal.svelte';
 	import type { ComponentEvents } from 'svelte';
 	import Card from './Card.svelte';
@@ -15,6 +16,9 @@
 	let cur = data.cur;
 	let next = data.next;
 
+	// Dynamic sizing
+	let innerWidth = browser ? window.innerWidth : 1920;
+
 	// Animation
 	let animate = false;
 	let rerender = false; // trigger
@@ -22,7 +26,7 @@
 	// Game logic
 	let score = 0;
 	let prevScore = score;
-	let endScreen = false;
+	let endScreen = true;
 
 	// Stats
 	let inPlay = false;
@@ -75,50 +79,98 @@
 	}
 </script>
 
-<div class=" bg-cd-green h-screen w-screen overflow-hidden absolute">
-	<a href="/"><img src="Logo.svg" alt="ChartDuel" class="absolute z-10 h-[5rem] top-5 left-5" /></a>
-	<div class="absolute z-10 top-10 right-8">
-		<p class="text-xl text-gray-300">
-			Built by <a class="hover:text-white font-bold" href="https://github.com/arm-out/ChartDuel"
-				><span class="underline">arm-out</span>&nbsp
-				<Github class="text-xl" style="fill: white; font-size: 1.2rem; display: inline" />
-			</a>
-		</p>
+<svelte:window bind:innerWidth />
+
+{#if innerWidth > 696}
+	<div class=" bg-cd-green h-screen w-screen overflow-hidden absolute">
+		<a href="/"
+			><img src="Logo.svg" alt="ChartDuel" class="absolute z-10 h-[5rem] top-5 left-5" /></a
+		>
+		<div class="absolute z-10 top-10 right-8">
+			<p class="text-xl text-gray-300">
+				Built by <a class="hover:text-white font-bold" href="https://github.com/arm-out/ChartDuel"
+					><span class="underline">arm-out</span>&nbsp
+					<Github class="text-xl" style="fill: white; font-size: 1.2rem; display: inline" />
+				</a>
+			</p>
+		</div>
+
+		{#key base.id}
+			<section
+				class="{animate
+					? 'carousel-left'
+					: ''} h-full w-[calc(50%-0.125rem)] absolute left-0 bg-cd-dark"
+			>
+				<Card {...base} color={base.color} />
+			</section>
+			<section
+				class="{animate
+					? 'carousel-left'
+					: ''} h-full w-[calc(50%-0.125rem)] absolute right-0 bg-cd-dark"
+			>
+				<Card
+					on:guess={handleGuess}
+					{...cur}
+					color={cur.color}
+					guess={true}
+					answer={base.streams}
+				/>
+			</section>
+		{/key}
+		{#key rerender}
+			<section
+				class="{animate
+					? 'carousel-left'
+					: ''} h-full w-[calc(50%-0.125rem)] absolute left-[calc(100%+0.26rem)] bg-cd-dark"
+			>
+				<Card on:guess={handleGuess} {...next} color={next.color} guess={true} />
+			</section>
+		{/key}
 	</div>
 
-	{#key base.id}
-		<section
-			class="{animate
-				? 'carousel-animation'
-				: ''} h-full w-[calc(50%-0.125rem)] absolute left-0 bg-cd-dark"
-		>
-			<Card {...base} color={base.color} />
-		</section>
-		<section
-			class="{animate
-				? 'carousel-animation'
-				: ''} h-full w-[calc(50%-0.125rem)] absolute right-0 bg-cd-dark"
-		>
-			<Card on:guess={handleGuess} {...cur} color={cur.color} guess={true} answer={base.streams} />
-		</section>
-	{/key}
-	{#key rerender}
-		<section
-			class="{animate
-				? 'carousel-animation'
-				: ''} h-full w-[calc(50%-0.125rem)] absolute left-[calc(100%+0.26rem)] bg-cd-dark"
-		>
-			<Card on:guess={handleGuess} {...next} color={next.color} guess={true} />
-		</section>
-	{/key}
-</div>
+	<p class="text-white absolute bottom-0 pl-5 text-3xl pb-5">
+		High Score: {$highScore}
+	</p>
+	<p class=" text-white absolute bottom-0 right-0 pr-5 text-3xl pb-5">
+		Score: {score}
+	</p>
 
-<p class="text-white absolute bottom-0 pl-5 text-3xl pb-5">
-	High Score: {$highScore}
-</p>
-<p class=" text-white absolute bottom-0 right-0 pr-5 text-3xl pb-5">
-	Score: {score}
-</p>
+	<!-- MOBILE VIEW -->
+{:else}
+	<div class=" bg-cd-green h-[100dvh] w-screen overflow-hidden absolute">
+		{#key base.id}
+			<section
+				class="{animate
+					? 'carousel-up'
+					: ''} h-[calc(50%-0.125rem)] w-full absolute top-0 bg-cd-dark"
+			>
+				<Card {...base} color={base.color} />
+			</section>
+			<section
+				class="{animate
+					? 'carousel-up'
+					: ''} h-[calc(50%-0.125rem)] w-full absolute bottom-0 bg-cd-dark"
+			>
+				<Card
+					on:guess={handleGuess}
+					{...cur}
+					color={cur.color}
+					guess={true}
+					answer={base.streams}
+				/>
+			</section>
+		{/key}
+		{#key rerender}
+			<section
+				class="{animate
+					? 'carousel-up'
+					: ''} h-[calc(50%-0.125rem)] w-full absolute top-[calc(100%+0.26rem)] bg-cd-dark"
+			>
+				<Card on:guess={handleGuess} {...next} color={next.color} guess={true} />
+			</section>
+		{/key}
+	</div>
+{/if}
 
 <EndModal bind:endScreen>
 	<h2 slot="header" class="text-5xl font-bold text-center text-cd-green">{prevScore}</h2>
@@ -145,7 +197,20 @@
 		}
 	}
 
-	.carousel-animation {
+	.carousel-left {
 		animation: moveLeft 1s ease-in-out;
+	}
+
+	@keyframes moveup {
+		0% {
+			transform: translateY(0);
+		}
+		100% {
+			transform: translateY(calc(-100% - 0.25rem));
+		}
+	}
+
+	.carousel-up {
+		animation: moveup 1s ease-in-out;
 	}
 </style>

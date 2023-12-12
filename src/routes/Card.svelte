@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { createEventDispatcher, onMount } from 'svelte';
 
 	export let title: string | null;
@@ -10,6 +11,7 @@
 	export let answer: number = 0;
 
 	const dispatch = createEventDispatcher();
+	let innerWidth = browser ? window.innerWidth : 1920;
 
 	let hasGuessed = false;
 	let countDisplay = 0;
@@ -49,36 +51,69 @@
 	}
 </script>
 
-<div
-	class="card-container h-screen flex flex-col flex-initial items-center pt-[20vh] space-y-12 transition-all duration-500"
-	style="background-image: linear-gradient({color}, #121212)"
->
-	<div>
-		<img src={image} class="h-80" alt={title} />
-		<p class="text-white w-80 pt-5 text-3xl">{title}</p>
-		<p class="text-cd-light w-80 pt-2 text-xl">{artist}</p>
+<svelte:window bind:innerWidth />
+
+{#if innerWidth > 696}
+	<div
+		class="card-container h-screen flex flex-col flex-initial items-center pt-[20vh] space-y-12 transition-all duration-500"
+		style="background-image: linear-gradient({color}, #121212)"
+	>
+		<div>
+			<img src={image} class="h-80" alt={title} />
+			<p class="text-white w-80 pt-5 text-3xl">{title}</p>
+			<p class="text-cd-light w-80 pt-2 text-xl">{artist}</p>
+		</div>
+
+		<div class="flex flex-col items-center">
+			{#if !guess}
+				<p class="text-cd-green text-6xl font-bold">{streams?.toLocaleString()}</p>
+				<p class="text-cd-light pt-1">Total global streams</p>
+			{:else if !hasGuessed}
+				<button
+					on:click={() => handleGuess('higher')}
+					class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-green rounded-full mb-3"
+					>Higher</button
+				>
+				<button
+					on:click={() => handleGuess('lower')}
+					class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-red rounded-full"
+					>Lower</button
+				>
+			{:else}
+				<p class="{textColor} text-6xl font-bold transition-colors duration-200">
+					{countDisplay.toLocaleString()}
+				</p>
+				<p class="text-cd-light pt-1">Total global streams</p>
+			{/if}
+		</div>
 	</div>
 
-	<div class="flex flex-col items-center">
-		{#if !guess}
-			<p class="text-cd-green text-6xl font-bold">{streams?.toLocaleString()}</p>
-			<p class="text-cd-light pt-1">Total global streams</p>
-		{:else if !hasGuessed}
-			<button
-				on:click={() => handleGuess('higher')}
-				class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-green rounded-full mb-3"
-				>Higher</button
-			>
-			<button
-				on:click={() => handleGuess('lower')}
-				class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-red rounded-full"
-				>Lower</button
-			>
-		{:else}
-			<p class="{textColor} text-6xl font-bold transition-colors duration-200">
-				{countDisplay.toLocaleString()}
-			</p>
-			<p class="text-cd-light pt-1">Total global streams</p>
-		{/if}
+	<!-- MOBILE VIEW -->
+{:else}
+	<div class="h-full w-full bg-cover" style="background-image: url({image})">
+		<div class="h-full w-full bg-black/80 flex flex-col items-center justify-center">
+			<h2 class="text-white w-[50%] text-center text-2xl">{title}</h2>
+			<p class="text-cd-light">{artist}</p>
+			{#if !guess}
+				<p class="text-cd-green text-5xl font-bold mt-5">{streams?.toLocaleString()}</p>
+				<p class="text-cd-light pt-1">Total global streams</p>
+			{:else if !hasGuessed}
+				<button
+					on:click={() => handleGuess('higher')}
+					class="text-white text-lg p-2 px-12 border-2 border-solid border-cd-green rounded-full mb-2 mt-5"
+					>Higher</button
+				>
+				<button
+					on:click={() => handleGuess('lower')}
+					class="text-white text-lg p-2 px-12 border-2 border-solid border-cd-red rounded-full"
+					>Lower</button
+				>
+			{:else}
+				<p class="{textColor} text-5xl font-bold transition-colors duration-200 mt-5">
+					{countDisplay.toLocaleString()}
+				</p>
+				<p class="text-cd-light pt-1">Total global streams</p>
+			{/if}
+		</div>
 	</div>
-</div>
+{/if}

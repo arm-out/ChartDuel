@@ -14,17 +14,17 @@
 	bind:this={dialog}
 	on:close={() => (endScreen = false)}
 	on:click|self={() => dialog.close()}
-	class="w-[30%] min-h-[40%] backdrop:backdrop-blur-sm bg-cd-dark"
+	class="h-[100dvh] w-screen sm:min-w-[30rem] sm:w-[30%] sm:min-h-[40%] backdrop:backdrop-blur-sm bg-cd-dark"
 >
 	<!-- svelte-ignore a11y-no-static-element-interactions -->
-	<div on:click|stopPropagation class="py-8 px-5">
+	<div on:click|stopPropagation class="py-8 px-5 relative h-full overflow-hidden">
 		<img src="Logo.svg" alt="ChartDuel" class="w-[70%] object-center block ml-auto mr-auto mb-4" />
 
 		<slot name="header" />
 		<p class="text-cd-light text-center mb-10">Your Score</p>
 		<slot />
 
-		<div class="flex gap-2">
+		<div class="flex gap-2 absolute bottom-5 w-[90%]">
 			<!-- svelte-ignore a11y-autofocus -->
 			<button
 				autofocus
