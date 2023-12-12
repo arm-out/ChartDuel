@@ -6,6 +6,7 @@
 	import type { Song } from './+page.server';
 	import { highScore } from '$lib/stores';
 	import { timesPlayed } from '$lib/stores';
+	import Github from '~icons/devicon/github';
 
 	export let data;
 
@@ -75,6 +76,16 @@
 </script>
 
 <div class=" bg-cd-green h-screen w-screen overflow-hidden absolute">
+	<a href="/"><img src="Logo.svg" alt="ChartDuel" class="absolute z-10 h-[5rem] top-5 left-5" /></a>
+	<div class="absolute z-10 top-10 right-8">
+		<p class="text-xl text-gray-300">
+			Built by <a class="hover:text-white font-bold" href="https://github.com/arm-out/ChartDuel"
+				><span class="underline">arm-out</span>&nbsp
+				<Github class="text-xl" style="fill: white; font-size: 1.2rem; display: inline" />
+			</a>
+		</p>
+	</div>
+
 	{#key base.id}
 		<section
 			class="{animate

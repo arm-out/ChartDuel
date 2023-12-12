@@ -36,6 +36,7 @@
 			>
 				<a
 					href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+					target="_blank"
 					class="text-white w-full flex items-center justify-center"
 					data-size="large"
 					data-text="Check out this game of Higher or Lower using @Spotify song streams"
