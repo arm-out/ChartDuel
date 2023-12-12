@@ -111,8 +111,17 @@
 
 <EndModal bind:endScreen>
 	<h2 slot="header" class="text-5xl font-bold text-center text-cd-green">{prevScore}</h2>
-	<p>High Score: {$highScore}</p>
-	<p>Nice try</p>
+	<!-- <p>Surely we can do better than that right?</p> -->
+	<div class="grid grid-cols-2 mb-10">
+		<div class="flex flex-col items-center">
+			<p class="text-4xl font-bold text-gray-300">{$highScore}</p>
+			<p class="text-cd-light">High score</p>
+		</div>
+		<div class="flex flex-col items-center">
+			<p class="text-4xl font-bold text-gray-300">{$timesPlayed}</p>
+			<p class="text-cd-light">Plays</p>
+		</div>
+	</div>
 </EndModal>
 
 <style>
