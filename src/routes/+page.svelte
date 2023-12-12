@@ -74,19 +74,19 @@
 	}
 </script>
 
-<div class=" bg-spotify-green h-screen w-screen overflow-hidden absolute">
+<div class=" bg-cd-green h-screen w-screen overflow-hidden absolute">
 	{#key base.id}
 		<section
 			class="{animate
 				? 'carousel-animation'
-				: ''} h-full w-[calc(50%-0.125rem)] absolute left-0 bg-spotify-dark"
+				: ''} h-full w-[calc(50%-0.125rem)] absolute left-0 bg-cd-dark"
 		>
 			<Card {...base} color={base.color} />
 		</section>
 		<section
 			class="{animate
 				? 'carousel-animation'
-				: ''} h-full w-[calc(50%-0.125rem)] absolute right-0 bg-spotify-dark"
+				: ''} h-full w-[calc(50%-0.125rem)] absolute right-0 bg-cd-dark"
 		>
 			<Card on:guess={handleGuess} {...cur} color={cur.color} guess={true} answer={base.streams} />
 		</section>
@@ -95,7 +95,7 @@
 		<section
 			class="{animate
 				? 'carousel-animation'
-				: ''} h-full w-[calc(50%-0.125rem)] absolute left-[calc(100%+0.26rem)] bg-spotify-dark"
+				: ''} h-full w-[calc(50%-0.125rem)] absolute left-[calc(100%+0.26rem)] bg-cd-dark"
 		>
 			<Card on:guess={handleGuess} {...next} color={next.color} guess={true} />
 		</section>
@@ -110,7 +110,7 @@
 </p>
 
 <EndModal bind:endScreen>
-	<h2 slot="header" class="text-5xl font-bold text-center text-spotify-green">{prevScore}</h2>
+	<h2 slot="header" class="text-5xl font-bold text-center text-cd-green">{prevScore}</h2>
 	<p>High Score: {$highScore}</p>
 	<p>Nice try</p>
 </EndModal>

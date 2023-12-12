@@ -25,14 +25,13 @@
 		} else {
 			countDisplay = streams;
 			setTimeout(() => {
-				console.log(guessBtn, streams.toLocaleString(), answer.toLocaleString());
 				if (
 					(guessBtn === 'higher' && streams > answer) ||
 					(guessBtn === 'lower' && streams < answer)
 				) {
-					textColor = 'text-spotify-green';
+					textColor = 'text-cd-green';
 				} else {
-					textColor = 'text-red-700';
+					textColor = 'text-cd-red';
 				}
 			}, 250);
 		}
@@ -57,29 +56,29 @@
 	<div>
 		<img src={image} class="h-80" alt={title} />
 		<p class="text-white w-80 pt-5 text-3xl">{title}</p>
-		<p class="text-spotify-light w-80 pt-2 text-xl">{artist}</p>
+		<p class="text-cd-light w-80 pt-2 text-xl">{artist}</p>
 	</div>
 
 	<div class="flex flex-col items-center">
 		{#if !guess}
-			<p class="text-spotify-green text-6xl font-bold">{streams?.toLocaleString()}</p>
-			<p class="text-spotify-light pt-1">Total global streams</p>
+			<p class="text-cd-green text-6xl font-bold">{streams?.toLocaleString()}</p>
+			<p class="text-cd-light pt-1">Total global streams</p>
 		{:else if !hasGuessed}
 			<button
 				on:click={() => handleGuess('higher')}
-				class="text-white text-xl p-4 px-12 bg-spotify-dark border-2 border-solid border-spotify-green rounded-full mb-3"
+				class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-green rounded-full mb-3"
 				>Higher</button
 			>
 			<button
 				on:click={() => handleGuess('lower')}
-				class="text-white text-xl p-4 px-12 bg-spotify-dark border-2 border-solid border-red-700 rounded-full"
+				class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-red rounded-full"
 				>Lower</button
 			>
 		{:else}
 			<p class="{textColor} text-6xl font-bold transition-colors duration-200">
 				{countDisplay.toLocaleString()}
 			</p>
-			<p class="text-spotify-light pt-1">Total global streams</p>
+			<p class="text-cd-light pt-1">Total global streams</p>
 		{/if}
 	</div>
 </div>

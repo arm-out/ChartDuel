@@ -3,13 +3,14 @@ export default {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
 		extend: {
-      colors: {
-        'spotify-gray': '#282828',
-        'spotify-dark': '#121212',
-        'spotify-green': '#1ED760',
-        'spotify-light': '#777777',
-      }
-    }
+			colors: {
+				'cd-gray': '#282828',
+				'cd-dark': '#121212',
+				'cd-green': '#1ED760',
+				'cd-light': '#777777',
+				'cd-red': '#D6241E'
+			}
+		}
 	},
 	plugins: []
 };
