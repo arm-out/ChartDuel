@@ -8,7 +8,6 @@
 	import { highScore } from '$lib/stores';
 	import { timesPlayed } from '$lib/stores';
 	import Github from '~icons/devicon/github';
-	import { fade } from 'svelte/transition';
 
 	export let data;
 
