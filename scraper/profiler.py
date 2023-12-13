@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import json
 
 us = pd.read_csv('us_data.csv')
@@ -71,33 +72,51 @@ def getGenre(genres):
     return list(genre_set)
 
 
-us_clean = us.copy()
-us_clean.drop(columns=['genres'], inplace=True)
+# us_clean = us.copy()
+# us_clean.drop(columns=['genres'], inplace=True)
 
-global_clean = global_df.copy()
-global_clean.drop(columns=['genres'], inplace=True)
+# global_clean = global_df.copy()
+# global_clean.drop(columns=['genres'], inplace=True)
 
 
 for i, row in global_df.iterrows():
-    if (pd.isnull(row['genres'])):
-        continue
+    if (row['latin'] == True):
+        global_df.at[i, 'rap'] = np.nan
+        global_df.at[i, 'rock'] = np.nan
+        global_df.at[i, 'country'] = np.nan
+        global_df.at[i, 'edm'] = np.nan
+        global_df.at[i, 'kpop'] = np.nan
+        global_df.at[i, 'pop'] = np.nan
+    elif (row['kpop'] == True):
+        global_df.at[i, 'rap'] = np.nan
+        global_df.at[i, 'rock'] = np.nan
+        global_df.at[i, 'country'] = np.nan
+        global_df.at[i, 'edm'] = np.nan
+        global_df.at[i, 'latin'] = np.nan
+        global_df.at[i, 'pop'] = np.nan
 
-    genre_list = getGenre(row['genres'])
-    for genre in genre_list:
-        global_clean.at[i, genre] = True
+    if i % 1000 == 0:
+        print(f'{i}/{len(global_df)}')
 
-    print(f'{i}/{len(global_df)}')
-
-global_clean.to_csv('global_data_clean.csv', index=False)
+global_df.to_csv('global_data_clean.csv', index=False)
 
 for i, row in us.iterrows():
-    if (pd.isnull(row['genres'])):
-        continue
+    if (row['latin'] == True):
+        us.at[i, 'rap'] = np.nan
+        us.at[i, 'rock'] = np.nan
+        us.at[i, 'country'] = np.nan
+        us.at[i, 'edm'] = np.nan
+        us.at[i, 'kpop'] = np.nan
+        us.at[i, 'pop'] = np.nan
+    elif (row['kpop'] == True):
+        us.at[i, 'rap'] = np.nan
+        us.at[i, 'rock'] = np.nan
+        us.at[i, 'country'] = np.nan
+        us.at[i, 'edm'] = np.nan
+        us.at[i, 'latin'] = np.nan
+        us.at[i, 'pop'] = np.nan
 
-    genre_list = getGenre(row['genres'])
-    for genre in genre_list:
-        us_clean.at[i, genre] = True
+    if i % 1000 == 0:
+        print(f'{i}/{len(global_df)}')
 
-    print(f'{i}/{len(us)}')
-
-us_clean.to_csv('us_data_clean.csv', index=False)
+us.to_csv('us_data_clean.csv', index=False)
