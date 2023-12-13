@@ -9,6 +9,66 @@ export type Json =
 export interface Database {
   public: {
     Tables: {
+      global_songs: {
+        Row: {
+          artist: string
+          artistId: string
+          country: boolean | null
+          edm: boolean | null
+          id: string
+          image: string
+          kpop: boolean | null
+          latin: boolean | null
+          pop: boolean | null
+          popularity: number
+          preview: string | null
+          rap: boolean | null
+          release_date: string
+          rock: boolean | null
+          streams: number
+          title: string
+          url: string
+        }
+        Insert: {
+          artist: string
+          artistId: string
+          country?: boolean | null
+          edm?: boolean | null
+          id: string
+          image: string
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity: number
+          preview?: string | null
+          rap?: boolean | null
+          release_date: string
+          rock?: boolean | null
+          streams: number
+          title: string
+          url: string
+        }
+        Update: {
+          artist?: string
+          artistId?: string
+          country?: boolean | null
+          edm?: boolean | null
+          id?: string
+          image?: string
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity?: number
+          preview?: string | null
+          rap?: boolean | null
+          release_date?: string
+          rock?: boolean | null
+          streams?: number
+          title?: string
+          url?: string
+        }
+        Relationships: []
+      }
       songs: {
         Row: {
           artist: string
@@ -33,8 +93,128 @@ export interface Database {
         }
         Relationships: []
       }
+      us_songs: {
+        Row: {
+          artist: string
+          artistId: string
+          country: boolean | null
+          edm: boolean | null
+          id: string
+          image: string
+          kpop: boolean | null
+          latin: boolean | null
+          pop: boolean | null
+          popularity: number
+          preview: string | null
+          rap: boolean | null
+          release_date: string
+          rock: boolean | null
+          streams: number
+          title: string
+          url: string
+        }
+        Insert: {
+          artist: string
+          artistId: string
+          country?: boolean | null
+          edm?: boolean | null
+          id: string
+          image: string
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity: number
+          preview?: string | null
+          rap?: boolean | null
+          release_date: string
+          rock?: boolean | null
+          streams: number
+          title: string
+          url: string
+        }
+        Update: {
+          artist?: string
+          artistId?: string
+          country?: boolean | null
+          edm?: boolean | null
+          id?: string
+          image?: string
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity?: number
+          preview?: string | null
+          rap?: boolean | null
+          release_date?: string
+          rock?: boolean | null
+          streams?: number
+          title?: string
+          url?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
+      global_random: {
+        Row: {
+          artist: string | null
+          artistId: string | null
+          country: boolean | null
+          edm: boolean | null
+          id: string | null
+          image: string | null
+          kpop: boolean | null
+          latin: boolean | null
+          pop: boolean | null
+          popularity: number | null
+          preview: string | null
+          rap: boolean | null
+          release_date: string | null
+          rock: boolean | null
+          streams: number | null
+          title: string | null
+          url: string | null
+        }
+        Insert: {
+          artist?: string | null
+          artistId?: string | null
+          country?: boolean | null
+          edm?: boolean | null
+          id?: string | null
+          image?: string | null
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity?: number | null
+          preview?: string | null
+          rap?: boolean | null
+          release_date?: string | null
+          rock?: boolean | null
+          streams?: number | null
+          title?: string | null
+          url?: string | null
+        }
+        Update: {
+          artist?: string | null
+          artistId?: string | null
+          country?: boolean | null
+          edm?: boolean | null
+          id?: string | null
+          image?: string | null
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity?: number | null
+          preview?: string | null
+          rap?: boolean | null
+          release_date?: string | null
+          rock?: boolean | null
+          streams?: number | null
+          title?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
       random_songs: {
         Row: {
           artist: string | null
@@ -56,6 +236,66 @@ export interface Database {
           image?: string | null
           streams?: number | null
           title?: string | null
+        }
+        Relationships: []
+      }
+      us_random: {
+        Row: {
+          artist: string | null
+          artistId: string | null
+          country: boolean | null
+          edm: boolean | null
+          id: string | null
+          image: string | null
+          kpop: boolean | null
+          latin: boolean | null
+          pop: boolean | null
+          popularity: number | null
+          preview: string | null
+          rap: boolean | null
+          release_date: string | null
+          rock: boolean | null
+          streams: number | null
+          title: string | null
+          url: string | null
+        }
+        Insert: {
+          artist?: string | null
+          artistId?: string | null
+          country?: boolean | null
+          edm?: boolean | null
+          id?: string | null
+          image?: string | null
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity?: number | null
+          preview?: string | null
+          rap?: boolean | null
+          release_date?: string | null
+          rock?: boolean | null
+          streams?: number | null
+          title?: string | null
+          url?: string | null
+        }
+        Update: {
+          artist?: string | null
+          artistId?: string | null
+          country?: boolean | null
+          edm?: boolean | null
+          id?: string | null
+          image?: string | null
+          kpop?: boolean | null
+          latin?: boolean | null
+          pop?: boolean | null
+          popularity?: number | null
+          preview?: string | null
+          rap?: boolean | null
+          release_date?: string | null
+          rock?: boolean | null
+          streams?: number | null
+          title?: string | null
+          url?: string | null
         }
         Relationships: []
       }
