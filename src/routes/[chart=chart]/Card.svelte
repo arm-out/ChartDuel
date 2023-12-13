@@ -1,14 +1,16 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { createEventDispatcher, onMount } from 'svelte';
+	import { page } from '$app/stores';
+	import { createEventDispatcher, onDestroy, onMount } from 'svelte';
 
-	export let title: string | null;
-	export let artist: string | null;
-	export let image: string | null;
+	export let title: string;
+	export let artist: string;
+	export let image: string;
 	export let streams: number;
-	export let color: string | undefined;
+	export let color: string;
 	export let guess: boolean = false;
 	export let answer: number = 0;
+	export let release_date: string;
 
 	const dispatch = createEventDispatcher();
 	let innerWidth = browser ? window.innerWidth : 1920;
@@ -18,6 +20,12 @@
 	let speed = 200;
 	let textColor = 'text-white';
 	let guessBtn: string = '';
+
+	let year: number;
+
+	$: if (release_date) {
+		year = parseInt(release_date.split('-')[0]);
+	}
 
 	function animate() {
 		const time = streams / speed;
@@ -67,7 +75,9 @@
 		<div class="flex flex-col items-center">
 			{#if !guess}
 				<p class="text-cd-green text-6xl font-bold">{streams?.toLocaleString()}</p>
-				<p class="text-cd-light pt-1">Total global streams</p>
+				<p class="text-cd-light pt-1">
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+				</p>
 			{:else if !hasGuessed}
 				<button
 					on:click={() => handleGuess('higher')}
@@ -79,11 +89,17 @@
 					class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-red rounded-full"
 					>Lower</button
 				>
+
+				{#if year <= 2014}
+					<p class="text-gray-300 mt-5">Streams in the Top 100 from 2014 onwards</p>
+				{/if}
 			{:else}
 				<p class="{textColor} text-6xl font-bold transition-colors duration-200">
 					{countDisplay.toLocaleString()}
 				</p>
-				<p class="text-cd-light pt-1">Total global streams</p>
+				<p class="text-cd-light pt-1">
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+				</p>
 			{/if}
 		</div>
 	</div>
@@ -96,7 +112,9 @@
 			<p class="text-cd-light">{artist}</p>
 			{#if !guess}
 				<p class="text-cd-green text-5xl font-bold mt-5">{streams?.toLocaleString()}</p>
-				<p class="text-cd-light pt-1">Total global streams</p>
+				<p class="text-cd-light pt-1">
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+				</p>
 			{:else if !hasGuessed}
 				<button
 					on:click={() => handleGuess('higher')}
@@ -108,11 +126,17 @@
 					class="text-white text-lg p-2 px-12 border-2 border-solid border-cd-red rounded-full"
 					>Lower</button
 				>
+
+				{#if year <= 2014}
+					<p class="text-gray-300 mt-5">Streams in the Top 100 from 2014 onwards</p>
+				{/if}
 			{:else}
 				<p class="{textColor} text-5xl font-bold transition-colors duration-200 mt-5">
 					{countDisplay.toLocaleString()}
 				</p>
-				<p class="text-cd-light pt-1">Total global streams</p>
+				<p class="text-cd-light pt-1">
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+				</p>
 			{/if}
 		</div>
 	</div>
