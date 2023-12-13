@@ -12,3 +12,5 @@ export const timesPlayed = writable(
 		: 0
 );
 timesPlayed.subscribe((value) => browser && localStorage.setItem('timesPlayed', String(value)));
+
+export const playPreviews = writable(true);

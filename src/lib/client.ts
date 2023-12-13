@@ -1,12 +1,35 @@
 import { createClient } from '@supabase/supabase-js';
-import type { Tables } from '$lib/types/supabase';
 
 export const supabase = createClient(
 	'https://bpzytemgdlcsjopsqpjs.supabase.co',
 	'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJwenl0ZW1nZGxjc2pvcHNxcGpzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDIxNzEzNDUsImV4cCI6MjAxNzc0NzM0NX0.QBoRCDyov8LPyWqVvON711ba3Ae3OrReDlnhBQZvxd4'
 );
 
-export const nextSong = async (n: number) => {
-	const { data } = await supabase.from('random_songs').select('*').limit(n);
-	return data as Tables<'songs'>[];
+export type Query = {
+	title: string;
+	artist: string;
+	streams: number;
+	image: string;
+	preview?: string;
+	url: string;
+	release_date: string;
+};
+
+export const nextSong = async (n: number, chart: string, genres: string[]) => {
+	const filter = genres.map((genre) => `${genre}.eq.true`).join(',');
+
+	if (genres.length === 0) {
+		const { data } = await supabase
+			.from(`${chart}_random`)
+			.select('title, artist, streams, image, preview, url, release_date')
+			.limit(n);
+		return data as Query[];
+	}
+
+	const { data } = await supabase
+		.from(`${chart}_random`)
+		.select('title, artist, streams, image, preview, url, release_date')
+		.or(filter)
+		.limit(n);
+	return data as Query[];
 };
