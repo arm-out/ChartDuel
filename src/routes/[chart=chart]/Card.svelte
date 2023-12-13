@@ -88,14 +88,14 @@
 				>
 
 				{#if year <= 2014}
-					<p class="text-gray-300 mt-5">Streams in the Top 100 from 2014 onwards</p>
+					<p class="text-gray-300 mt-5">Streams in the Top 200 from 2014 onwards</p>
 				{/if}
 			{:else}
 				<p class="{textColor} text-6xl font-bold transition-colors duration-200">
 					{countDisplay.toLocaleString()}
 				</p>
 				<p class="text-cd-light pt-1">
-					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams in the Top 200
 				</p>
 			{/if}
 		</div>
@@ -125,14 +125,14 @@
 				>
 
 				{#if year <= 2014}
-					<p class="text-gray-300 mt-5">Streams in the Top 100 from 2014 onwards</p>
+					<p class="text-gray-300 mt-5">Streams in the Top 200 from 2014 onwards</p>
 				{/if}
 			{:else}
 				<p class="{textColor} text-5xl font-bold transition-colors duration-200 mt-5">
 					{countDisplay.toLocaleString()}
 				</p>
 				<p class="text-cd-light pt-1">
-					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams in the Top 200
 				</p>
 			{/if}
 		</div>
