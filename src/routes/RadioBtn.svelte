@@ -28,7 +28,7 @@
 	}
 </script>
 
-<div class="w-full flex flex-row flex-wrap gap-x-2 gap-y-2 px-5">
+<div class="w-full flex flex-row flex-wrap gap-x-2 gap-y-2 px-10">
 	<button
 		on:click={clickAll}
 		class="{genres.length == 0
