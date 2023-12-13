@@ -4,10 +4,8 @@
 	import { getCount } from '$lib/client';
 	import type { ComponentEvents } from 'svelte';
 
-	export let data;
-
-	let us_count = data.us_count;
-	let global_count = data.global_count;
+	let us_count: number | null = 9451;
+	let global_count: number | null = 9249;
 
 	let genres: string[] = [];
 	let params = '?genres';
