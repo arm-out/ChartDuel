@@ -51,7 +51,7 @@
 	</div>
 
 	<p class="text-lg text-cd-light absolute bottom-5">
-		Built by <a class="hover:text-white font-bold" href="https://github.com/arm-out/ChartDuel"
+		Built by <a class="hover:text-white font-bold" href="https://github.com/arm-out/ChartDuels"
 			><span class="underline">arm-out</span>&nbsp
 			<svg xmlns="http://www.w3.org/2000/svg" class="h-8 inline" viewBox="0 0 24 24" {...$$props}
 				><path

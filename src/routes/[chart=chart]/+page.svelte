@@ -132,7 +132,9 @@
 			>
 			<div class="absolute z-10 top-10 right-8">
 				<p class="text-xl text-gray-300">
-					Built by <a class="hover:text-white font-bold" href="https://github.com/arm-out/ChartDuel"
+					Built by <a
+						class="hover:text-white font-bold"
+						href="https://github.com/arm-out/ChartDuels"
 						><span class="underline">arm-out</span>&nbsp
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
