@@ -78,12 +78,12 @@
 			{:else if !hasGuessed}
 				<button
 					on:click={() => handleGuess('higher')}
-					class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-green rounded-full mb-3"
+					class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-green rounded-full mb-3 hover:bg-cd-green hover:text-black transition-colors duration-200 hover:font-bold"
 					>Higher</button
 				>
 				<button
 					on:click={() => handleGuess('lower')}
-					class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-red rounded-full"
+					class="text-white text-xl p-4 px-12 bg-cd-dark border-2 border-solid border-cd-red rounded-full hover:bg-cd-red hover:text-black transition-colors duration-200 hover:font-bold"
 					>Lower</button
 				>
 
