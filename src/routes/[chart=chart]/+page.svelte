@@ -93,13 +93,13 @@
 			if (cur.streams > base.streams) {
 				score++;
 			} else {
-				// endGame();
+				endGame();
 			}
 		} else {
 			if (cur.streams < base.streams) {
 				score++;
 			} else {
-				// endGame();
+				endGame();
 			}
 		}
 
