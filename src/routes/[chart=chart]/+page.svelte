@@ -57,7 +57,7 @@
 	$: if (browser && audio) {
 		audio.src = cur.preview!;
 		audio.load();
-		if (get(playPreviews)) {
+		if (get(playPreviews) && !endScreen) {
 			audio.play().catch((e) => playPreviews.set(false));
 		}
 	}
