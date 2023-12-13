@@ -21,8 +21,8 @@
 	let textColor = 'text-white';
 	let guessBtn: string = '';
 
-	let year = release_date.split('-')[0];
-	$: year = release_date.split('-')[0];
+	let year = parseInt(release_date.split('-')[0]);
+	$: year = parseInt(release_date.split('-')[0]);
 
 	function animate() {
 		const time = streams / speed;
