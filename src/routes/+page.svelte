@@ -26,7 +26,7 @@
 <div
 	class="flex flex-col h-screen w-screen items-center justify-top bg-cd-dark overflow-hidden pt-5"
 >
-	<h1 class="invisible">ChartDuels!</h1>
+	<h1 class="invisible">ChartDuels</h1>
 	<img src="Logo.svg" alt="ChartDuels" class=" max-w-2xl w-[80%]" />
 	<h2 class="text-xl sm:text-2xl w-[80%] mt-5 mb-[10dvh] text-center text-white">
 		Play a game of higher or lower with the Spotify charts!

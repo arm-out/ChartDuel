@@ -40,7 +40,7 @@
 					class="text-white w-full flex items-center justify-center"
 					data-size="large"
 					data-text="Check out this game of Higher or Lower using @Spotify song streams"
-					data-url="https://chartduel.com"
+					data-url="https://chartduels.com"
 					data-lang="en"
 					data-dnt="true"
 					data-show-count="false"
