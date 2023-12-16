@@ -73,7 +73,9 @@
 			{#if !guess}
 				<p class="text-cd-green text-6xl font-bold">{streams?.toLocaleString()}</p>
 				<p class="text-cd-light pt-1">
-					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams {year <= 2014
+						? 'in the Top 200 from 2014 onwards'
+						: ''}
 				</p>
 			{:else if !hasGuessed}
 				<button
@@ -110,7 +112,9 @@
 			{#if !guess}
 				<p class="text-cd-green text-5xl font-bold mt-5">{streams?.toLocaleString()}</p>
 				<p class="text-cd-light pt-1">
-					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams
+					Total {$page.params.chart == 'global' ? 'global' : 'US'} streams {year <= 2014
+						? 'in the Top 200 from 2014 onwards'
+						: ''}
 				</p>
 			{:else if !hasGuessed}
 				<button

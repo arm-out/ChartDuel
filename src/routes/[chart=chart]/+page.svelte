@@ -10,6 +10,7 @@
 	import Github from '~icons/devicon/github';
 	import { page } from '$app/stores';
 	import { get } from 'svelte/store';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
 
 	export let data;
 
@@ -113,6 +114,10 @@
 			buffer.push(next);
 		}, 1000);
 	}
+
+	beforeNavigate(() => {
+		audio.remove();
+	});
 </script>
 
 <svelte:window bind:innerWidth />
