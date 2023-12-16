@@ -20,16 +20,6 @@
 	<meta property="og:url" content="https://chartduels.com" />
 	<meta property="og:type" content="website" />
 
-	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="ChartDuels" />
-	<meta
-		name="twitter:description"
-		content="Play a game of higher or lower with the Spotify charts!"
-	/>
-	<meta name="twitter:image" content="/og-image.png" />
-	<meta name="twitter:url" content="https://chartduels.com" />
-	<meta name="twitter:creator" content="@armzout" />
-
 	<title>ChartDuels</title>
 </svelte:head>
 
